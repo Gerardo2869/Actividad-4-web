@@ -22,6 +22,7 @@ class Superhero extends Model
         'gender_id',
         'powers',
         'affiliation',
+        'origin'
     ];
 
     /**
