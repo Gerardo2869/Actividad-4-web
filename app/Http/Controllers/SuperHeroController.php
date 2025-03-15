@@ -57,7 +57,7 @@ class SuperheroController extends Controller
      */
     public function edit(Superhero $superhero)
     {
-        $universes = Universe::all();
+        $universes = Universo::all();
         $types = SuperheroType::all();
         $genders = Gender::all();
 
@@ -74,9 +74,10 @@ class SuperheroController extends Controller
             'name' => 'required|string|max:255',
             'powers' => 'nullable|string|max:255',
             'origin' => 'nullable|string|max:255',
-            'universe_id' => 'required|exists:universes,id',
+            'universe_id' => 'required|exists:universos,id',
             'type_id' => 'required|exists:superhero_types,id',
             'gender_id' => 'required|exists:genders,id',
+
         ]);
 
         // Actualizar el superhéroe

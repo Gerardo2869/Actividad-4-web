@@ -30,13 +30,49 @@
             </div>
 
             <div class="mb-3">
-                <label for="power" class="form-label">Poder</label>
-                <input type="text" name="power" id="power" value="{{ $superhero->power }}" class="form-control" required>
+                <label for="powers" class="form-label">Poder</label>
+                <input type="text" name="powers" id="powers" value="{{ $superhero->powers }}" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label for="origin" class="form-label">Origen</label>
                 <input type="text" name="origin" id="origin" value="{{ $superhero->origin }}" class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="universe_id" class="form-label">Universo</label>
+                <select name="universe_id" id="universe_id" class="form-control" required>
+                    <option value="">Seleccione un universo</option>
+                    @foreach ($universes as $universe)
+                        <option value="{{ $universe->id }}" {{ $superhero->universe_id == $universe->id ? 'selected' : '' }}>
+                            {{ $universe->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="type_id" class="form-label">Tipo de Superhéroe</label>
+                <select name="type_id" id="type_id" class="form-control" required>
+                    <option value="">Seleccione un tipo</option>
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}" {{ $superhero->type_id == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="gender_id" class="form-label">Género</label>
+                <select name="gender_id" id="gender_id" class="form-control" required>
+                    <option value="">Seleccione un género</option>
+                    @foreach ($genders as $gender)
+                        <option value="{{ $gender->id }}" {{ $superhero->gender_id == $gender->id ? 'selected' : '' }}>
+                            {{ $gender->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <div class="text-center">
