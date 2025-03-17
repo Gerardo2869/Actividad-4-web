@@ -94,4 +94,10 @@ class SuperheroController extends Controller
         $superhero->delete();
         return redirect()->route('superheroes.index')->with('success', 'Superhéroe eliminado.');
     }
+
+    public function show(Superhero $superhero)
+{
+    return view('superheroes.show', compact('superhero'));
+}
+
 }

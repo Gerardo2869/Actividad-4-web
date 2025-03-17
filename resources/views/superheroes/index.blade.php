@@ -32,13 +32,15 @@
                     <td>{{ $superhero->powers }}</td> <!-- Aquí cambiamos de "power" a "powers" -->
                     <td>{{ $superhero->origin }}</td>
                     <td>
-                        <a href="{{ route('superheroes.edit', $superhero->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
-                        <form action="{{ route('superheroes.destroy', $superhero->id) }}" method="POST" class="d-inline">
+                            <a href="{{ route('superheroes.show', $superhero->id) }}" class="btn btn-outline-info btn-sm">Ver</a>
+                            <a href="{{ route('superheroes.edit', $superhero->id) }}" class="btn btn-outline-warning btn-sm">Editar</a>
+                            <form action="{{ route('superheroes.destroy', $superhero->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar este superhéroe?')">Eliminar</button>
-                        </form>
+                            </form>
                     </td>
+
                 </tr>
                 @endforeach
             </tbody>
