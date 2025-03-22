@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Universos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
-            background-color: #f5f5f7; 
-            color: #1d1d1f;
-        }
         .glassmorphism {
             background: rgba(255, 255, 255, 0.6);
             backdrop-filter: blur(10px);
@@ -30,37 +25,40 @@
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="w-full max-w-2xl glassmorphism">
-        <h1 class="text-3xl font-semibold text-center mb-6">🌌 Universos</h1>
+<body class="bg-gray-50 text-gray-900 font-sans flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-4xl glassmorphism">
+        <h1 class="text-4xl font-semibold text-center mb-6">🌌 Universos</h1>
 
-        <table class="w-full border-separate border-spacing-y-2">
-            <thead>
-                <tr class="text-gray-700">
-                    <th class="p-3 text-left">ID</th>
-                    <th class="p-3 text-left">Nombre</th>
-                    <th class="p-3 text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($universes as $universe)
-                <tr class="bg-white shadow-md rounded-lg">
-                    <td class="p-4 rounded-l-lg">{{ $universe->id }}</td>
-                    <td class="p-4">{{ $universe->name }}</td>
-                    <td class="p-4 flex justify-center space-x-3 rounded-r-lg">
-                        <a href="{{ route('universes.edit', $universe->id) }}" class="text-yellow-500 hover:text-yellow-600">Editar</a>
-                        <form action="{{ route('universes.destroy', $universe->id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-600" onclick="return confirm('¿Seguro que deseas eliminar este universo?')">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="overflow-hidden rounded-xl shadow-lg bg-white">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-gray-100 text-gray-700">
+                        <th class="p-4 text-lg">ID</th>
+                        <th class="p-4 text-lg">Nombre</th>
+                        <th class="p-4 text-lg text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-300">
+                    @foreach($universes as $universe)
+                    <tr class="hover:bg-gray-200 transition">
+                        <td class="p-4 text-gray-700">{{ $universe->id }}</td>
+                        <td class="p-4 text-gray-700 font-medium">{{ $universe->name }}</td>
+                        <td class="p-4 text-center">
+                            <a href="{{ route('universes.show', $universe->id) }}" class="text-green-600 hover:text-green-800 transition mr-4">Ver</a>
+                            <a href="{{ route('universes.edit', $universe->id) }}" class="text-blue-600 hover:text-blue-800 transition mr-4">Editar</a>
+                            <form action="{{ route('universes.destroy', $universe->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-500 hover:text-red-700 transition" onclick="return confirm('¿Seguro que deseas eliminar este universo?')">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
-        <div class="text-center mt-6">
+        <div class="mt-6 text-center">
             <a href="{{ route('universes.create') }}" class="btn-apple shadow-md">+ Agregar Universo</a>
         </div>
     </div>

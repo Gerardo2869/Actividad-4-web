@@ -9,6 +9,12 @@
 <body class="bg-gray-50 text-gray-900 font-sans">
     <div class="max-w-4xl mx-auto p-6">
         <h1 class="text-4xl font-semibold mb-6 text-center text-gray-800">Lista de Géneros</h1>
+
+        @if(session('success'))
+            <div class="bg-green-500 text-white p-4 rounded mb-4 text-center">
+                {{ session('success') }}
+            </div>
+        @endif
         
         <div class="overflow-hidden rounded-xl shadow-lg bg-white">
             <table class="w-full text-left border-collapse">
@@ -25,11 +31,12 @@
                         <td class="p-4 text-gray-700">{{ $gender->id }}</td>
                         <td class="p-4 text-gray-700 font-medium">{{ $gender->name }}</td>
                         <td class="p-4 text-center">
-                            <a href="{{ route('genders.edit', $gender->id) }}" class="text-blue-600 hover:text-blue-800 transition">Editar</a>
+                            <a href="{{ route('genders.show', $gender->id) }}" class="text-green-600 hover:text-green-800 transition mr-4">Ver</a>
+                            <a href="{{ route('genders.edit', $gender->id) }}" class="text-blue-600 hover:text-blue-800 transition mr-4">Editar</a>
                             <form action="{{ route('genders.destroy', $gender->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-500 hover:text-red-700 transition ml-4" onclick="return confirm('¿Seguro que deseas eliminar este género?')">Eliminar</button>
+                                <button type="submit" class="text-red-500 hover:text-red-700 transition" onclick="return confirm('¿Seguro que deseas eliminar este género?')">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -43,4 +50,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>

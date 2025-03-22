@@ -14,3 +14,5 @@ Route::resource('genders', GenderController::class);
 Route::resource('universes', UniverseController::class);
 Route::resource('superheroes', SuperHeroController::class);
 Route::get('/superheroes/{superhero}', [SuperheroController::class, 'show'])->name('superheroes.show');
+Route::get('/genders/{gender}', [GenderController::class, 'show'])->name('genders.show');
+Route::delete('/genders/{id}', [GenderController::class, 'destroy'])->name('genders.destroy');

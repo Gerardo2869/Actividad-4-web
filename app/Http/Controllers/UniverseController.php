@@ -49,33 +49,57 @@ class UniverseController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        // Aquí puedes agregar la lógica para mostrar un universo específico
-    }
+{
+    $universe = Universo::findOrFail($id); // Busca el universo o da error 404
+    return view('universes.show', compact('universe')); // Muestra la vista con los datos
+}
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        // Aquí puedes agregar la lógica para editar un universo específico
-    }
+{
+    $universe = Universo::findOrFail($id); // Busca el universo o lanza un error 404
+    return view('universes.edit', compact('universe')); // Retorna la vista con los datos
+}
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        // Aquí puedes agregar la lógica para actualizar un universo específico
+        // Validar los datos ingresados
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+    
+        // Buscar el universo por ID y actualizar sus datos
+        $universe = Universo::findOrFail($id);
+        $universe->name = $request->input('name');
+        $universe->description = $request->input('description');
+        $universe->save(); // Guardar cambios en la base de datos
+    
+        // Redirigir a la lista de universos con un mensaje de éxito
+        return redirect()->route('universes.index')->with('success', 'Universo actualizado correctamente.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        // Aquí puedes agregar la lógica para eliminar un universo específico
-    }
+{
+    // Buscar el universo por ID y eliminarlo
+    $universe = Universo::findOrFail($id);
+    $universe->delete();
+
+    // Redirigir a la lista de universos con un mensaje de éxito
+    return redirect()->route('universes.index')->with('success', 'Universo eliminado correctamente.');
+}
+
 }
 
 
