@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Género</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans">
-    <div class="max-w-2xl mx-auto p-6 mt-10 bg-white shadow-lg rounded-xl">
-        <h1 class="text-3xl font-semibold mb-6 text-center text-gray-800">Editar Género</h1>
+<body class="bg-light">
+    <div class="container mt-5 p-4 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Editar Género</h1>
+            <a href="{{ route('genders.index') }}" class="btn btn-secondary">Volver</a>
+        </div>
 
         @if ($errors->any())
-            <div class="bg-red-500 text-white p-4 rounded mb-4">
+            <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -20,23 +23,18 @@
             </div>
         @endif
 
-        <form action="{{ route('genders.update', $gender->id) }}" method="POST" class="space-y-4">
+        <form action="{{ route('genders.update', $gender->id) }}" method="POST">
             @csrf
             @method('PUT')
-            
-            <div>
-                <label for="name" class="block text-lg font-medium text-gray-700">Nombre del Género</label>
-                <input type="text" name="name" id="name" value="{{ $gender->name }}" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none" required>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre del Género</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $gender->name) }}" required>
             </div>
 
             <div class="text-center">
-                <button type="submit" class="bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition">Actualizar</button>
+                <button type="submit" class="btn btn-primary">Actualizar Género</button>
             </div>
         </form>
-
-        <div class="mt-6 text-center">
-            <a href="{{ route('genders.index') }}" class="text-blue-500 hover:text-blue-700 transition">Volver a la lista</a>
-        </div>
     </div>
 </body>
 </html>

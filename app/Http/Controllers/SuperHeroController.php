@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Superhero;
-use App\Models\Universo;
-use App\Models\SuperheroType;
+use App\Models\Universe;
 use App\Models\Gender;
+use App\Models\SuperheroType;
 
 class SuperheroController extends Controller
 {
@@ -15,7 +15,7 @@ class SuperheroController extends Controller
      */
     public function index()
     {
-        $superheroes = Superhero::all();
+        $superheroes = Superhero::with('universe')->get();
         return view('superheroes.index', compact('superheroes'));
     }
 
@@ -24,7 +24,7 @@ class SuperheroController extends Controller
      */
     public function create()
     {
-        $universes = Universo::all();
+        $universes = Universe::all();
         $types = SuperheroType::all();
         $genders = Gender::all();
 
@@ -39,12 +39,17 @@ class SuperheroController extends Controller
         // Validar los campos del formulario
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'powers' => 'required|string|max:255',
-            'origin' => 'nullable|string|max:255',
-            'universe_id' => 'required|exists:universos,id',
+            'real_name' => 'required|string|max:255',
+            'powers' => 'required|string',
+            'affiliation' => 'required|string|max:255',
+            'universe_id' => 'required|exists:universes,id',
             'type_id' => 'required|exists:superhero_types,id',
             'gender_id' => 'required|exists:genders,id',
         ]);
+
+        // Renombrar type_id a superhero_type_id antes de crear
+        $validatedData['superhero_type_id'] = $validatedData['type_id'];
+        unset($validatedData['type_id']);
 
         // Crear el superhéroe con los datos validados
         Superhero::create($validatedData);
@@ -57,7 +62,7 @@ class SuperheroController extends Controller
      */
     public function edit(Superhero $superhero)
     {
-        $universes = Universo::all();
+        $universes = Universe::all();
         $types = SuperheroType::all();
         $genders = Gender::all();
 
@@ -72,18 +77,22 @@ class SuperheroController extends Controller
         // Validación de los datos
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'powers' => 'nullable|string|max:255',
-            'origin' => 'nullable|string|max:255',
-            'universe_id' => 'required|exists:universos,id',
+            'real_name' => 'required|string|max:255',
+            'powers' => 'required|string',
+            'affiliation' => 'required|string|max:255',
+            'universe_id' => 'required|exists:universes,id',
             'type_id' => 'required|exists:superhero_types,id',
             'gender_id' => 'required|exists:genders,id',
-
         ]);
+
+        // Renombrar type_id a superhero_type_id antes de actualizar
+        $validatedData['superhero_type_id'] = $validatedData['type_id'];
+        unset($validatedData['type_id']);
 
         // Actualizar el superhéroe
         $superhero->update($validatedData);
 
-        return redirect()->route('superheroes.index')->with('success', 'Superhéroe actualizado correctamente.');
+        return redirect()->route('superheroes.index')->with('success', 'Superhéroe actualizado exitosamente.');
     }
 
     /**
@@ -92,12 +101,11 @@ class SuperheroController extends Controller
     public function destroy(Superhero $superhero)
     {
         $superhero->delete();
-        return redirect()->route('superheroes.index')->with('success', 'Superhéroe eliminado.');
+        return redirect()->route('superheroes.index')->with('success', 'Superhéroe eliminado exitosamente.');
     }
 
     public function show(Superhero $superhero)
-{
-    return view('superheroes.show', compact('superhero'));
-}
-
+    {
+        return view('superheroes.show', compact('superhero'));
+    }
 }

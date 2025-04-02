@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             SuperheroTypeSeeder::class,
             GenderSeeder::class,
             UniversoSeeder::class,
+            DefaultUsersSeeder::class,
         ]);
 
         Superhero::factory(100)->create();

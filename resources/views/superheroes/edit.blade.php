@@ -30,13 +30,18 @@
             </div>
 
             <div class="mb-3">
-                <label for="powers" class="form-label">Poder</label>
-                <input type="text" name="powers" id="powers" value="{{ $superhero->powers }}" class="form-control" required>
+                <label for="real_name" class="form-label">Nombre Real</label>
+                <input type="text" name="real_name" id="real_name" value="{{ $superhero->real_name }}" class="form-control" required>
             </div>
 
             <div class="mb-3">
-                <label for="origin" class="form-label">Origen</label>
-                <input type="text" name="origin" id="origin" value="{{ $superhero->origin }}" class="form-control">
+                <label for="powers" class="form-label">Poderes</label>
+                <textarea name="powers" id="powers" class="form-control" required>{{ $superhero->powers }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="affiliation" class="form-label">Afiliación</label>
+                <input type="text" name="affiliation" id="affiliation" value="{{ $superhero->affiliation }}" class="form-control" required>
             </div>
 
             <div class="mb-3">

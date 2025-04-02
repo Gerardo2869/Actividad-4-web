@@ -1,18 +1,36 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GenderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SuperheroController;
 use App\Http\Controllers\UniverseController;
-use App\Http\Controllers\SuperHeroController;
-
+use App\Http\Controllers\GenderController;
+use App\Http\Controllers\SuperheroTypeController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('genders', GenderController::class);
-Route::resource('universes', UniverseController::class);
-Route::resource('superheroes', SuperHeroController::class);
-Route::get('/superheroes/{superhero}', [SuperheroController::class, 'show'])->name('superheroes.show');
-Route::get('/genders/{gender}', [GenderController::class, 'show'])->name('genders.show');
-Route::delete('/genders/{id}', [GenderController::class, 'destroy'])->name('genders.destroy');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Rutas para Superhéroes
+    Route::resource('superheroes', SuperheroController::class);
+
+    // Rutas para Universos
+    Route::resource('universes', UniverseController::class);
+
+    // Rutas para Géneros
+    Route::resource('genders', GenderController::class);
+
+    // Rutas para Tipos de Superhéroes
+    Route::resource('superhero-types', SuperheroTypeController::class);
+});
+
+require __DIR__.'/auth.php';
