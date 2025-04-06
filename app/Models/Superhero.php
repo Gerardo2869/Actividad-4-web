@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Universe;
 
 class Superhero extends Model
 {
@@ -30,8 +31,9 @@ class Superhero extends Model
      */
     public function universe()
     {
-        return $this->belongsTo(Universo::class);
+        return $this->belongsTo(Universe::class);
     }
+    
 
     /**
      * Get the type of the superhero.

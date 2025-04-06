@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Universo extends Model
+class Universe extends Model
 {
     use HasFactory;
 
-    protected $table = 'universos'; // Especificamos el nombre correcto de la tabla
+    protected $table = 'universes'; // Especificamos el nombre correcto de la tabla
 
     protected $fillable = ['name', 'description'];
 }

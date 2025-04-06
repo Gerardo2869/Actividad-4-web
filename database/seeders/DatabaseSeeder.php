@@ -28,6 +28,6 @@ class DatabaseSeeder extends Seeder
             DefaultUsersSeeder::class,
         ]);
 
-        Superhero::factory(100)->create();
+        Superhero::factory(10)->create();
     }
 }

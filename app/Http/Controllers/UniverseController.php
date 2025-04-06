@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Universo;
+use App\Models\Universe;
 
 class UniverseController extends Controller
 {
@@ -12,7 +12,7 @@ class UniverseController extends Controller
      */
     public function index()
     {
-        $universes = Universo::all(); // Obtiene todos los universos
+        $universes = Universe::all(); // Obtiene todos los universos
         return view('universes.index', compact('universes')); // Pasa los universos a la vista
     }
 
@@ -36,10 +36,10 @@ class UniverseController extends Controller
         ]);
 
         // Crear un nuevo universo
-        $universo = new Universo();
-        $universo->name = $request->input('name');
-        $universo->description = $request->input('description');
-        $universo->save(); // Guarda el universo en la base de datos
+        $universe = new Universe();
+        $universe->name = $request->input('name');
+        $universe->description = $request->input('description');
+        $universe->save(); // Guarda el universo en la base de datos
 
         // Redirigir al usuario a la lista de universos con un mensaje de éxito
         return redirect()->route('universes.index')->with('success', 'Universe created successfully!');
@@ -50,7 +50,7 @@ class UniverseController extends Controller
      */
     public function show(string $id)
 {
-    $universe = Universo::findOrFail($id); // Busca el universo o da error 404
+    $universe = Universe::findOrFail($id); // Busca el universo o da error 404
     return view('universes.show', compact('universe')); // Muestra la vista con los datos
 }
 
@@ -60,7 +60,7 @@ class UniverseController extends Controller
      */
     public function edit(string $id)
 {
-    $universe = Universo::findOrFail($id); // Busca el universo o lanza un error 404
+    $universe = Universe::findOrFail($id); // Busca el universo o lanza un error 404
     return view('universes.edit', compact('universe')); // Retorna la vista con los datos
 }
 
@@ -77,7 +77,7 @@ class UniverseController extends Controller
         ]);
     
         // Buscar el universo por ID y actualizar sus datos
-        $universe = Universo::findOrFail($id);
+        $universe = Universe::findOrFail($id);
         $universe->name = $request->input('name');
         $universe->description = $request->input('description');
         $universe->save(); // Guardar cambios en la base de datos
@@ -93,7 +93,7 @@ class UniverseController extends Controller
     public function destroy(string $id)
 {
     // Buscar el universo por ID y eliminarlo
-    $universe = Universo::findOrFail($id);
+    $universe = Universe::findOrFail($id);
     $universe->delete();
 
     // Redirigir a la lista de universos con un mensaje de éxito
