@@ -19,7 +19,7 @@ class Superhero extends Model
         'name',
         'real_name',
         'universe_id',
-        'type_id',
+        'superhero_type_id',
         'gender_id',
         'powers',
         'affiliation',
