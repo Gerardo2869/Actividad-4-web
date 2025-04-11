@@ -81,13 +81,13 @@ class SuperheroController extends Controller
             'powers' => 'required|string',
             'affiliation' => 'required|string|max:255',
             'universe_id' => 'required|exists:universes,id',
-            'type_id' => 'required|exists:superhero_types,id',
+            'superhero_type_id' => 'required|exists:superhero_types,id',
             'gender_id' => 'required|exists:genders,id',
         ]);
 
         // Renombrar type_id a superhero_type_id antes de actualizar
-        $validatedData['superhero_type_id'] = $validatedData['type_id'];
-        unset($validatedData['type_id']);
+        //$validatedData['superhero_type_id'] = $validatedData['type_id'];
+        //unset($validatedData['type_id']);
 
         // Actualizar el superhéroe
         $superhero->update($validatedData);

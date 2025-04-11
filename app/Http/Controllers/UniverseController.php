@@ -101,5 +101,3 @@ class UniverseController extends Controller
 }
 
 }
-
-
