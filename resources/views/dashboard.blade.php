@@ -45,6 +45,16 @@
                                 Ver Tipos
                             </a>
                         </div>
+
+                        <!-- Subir Archivos -->
+                        <div class="bg-red-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                            <h3 class="text-xl font-semibold text-red-800 mb-4">📁 Subir Archivos</h3>
+                            <p class="text-red-600 mb-4">Carga archivos al servidor fácilmente.</p>
+                            <a href="{{ url('/subir') }}" class="inline-block bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                                Subir Archivo
+                            </a>
+                        </div>
+
                     </div>
                 </div>
             </div>

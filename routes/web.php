@@ -7,6 +7,8 @@ use App\Http\Controllers\GenderController;
 use App\Http\Controllers\SuperheroTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\GenderApiController;
+use App\Http\Controllers\ArchivoController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +35,11 @@ Route::middleware('auth')->group(function () {
     // Rutas para Tipos de Superhéroes
     Route::resource('superhero-types', SuperheroTypeController::class);
 });
+Route::get('/subir', function () {
+    return view('subir');
+});
+
+Route::post('/subir-archivo', [ArchivoController::class, 'subir'])->name('archivo.subir');
 
 require __DIR__.'/auth.php';
 // Agrega esto al final del archivo
